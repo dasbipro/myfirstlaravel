@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\MyContact;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,3 +47,5 @@ Route::get('add-student', 'StudentController@create');
 Route::post('insert-student', 'StudentController@store');
 
 Route::get('students','StudentController@index');
+Route::get('edit-student/{id}','StudentController@edit');
+Route::post('update-student/{id}','StudentController@update');

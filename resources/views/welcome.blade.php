@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel First Class
+                    Laravel 6th Semester
                 </div>
 
                 <div class="links">

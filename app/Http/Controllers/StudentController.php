@@ -30,7 +30,7 @@ class StudentController extends Controller
         $email = $req->email;
         $dob = $req->dob;
 
-        $obj = new Student();  
+        $obj = new Student();
 
         $obj->name = $name;
         $obj->email = $email;
@@ -43,6 +43,27 @@ class StudentController extends Controller
 
         return redirect()->to('students');
         //eloquent syntax
+
+    }
+
+    public function edit($id){
+        $students = Student::where('id', '=', $id) -> first(); //select * from studen where id = 1/2
+        //first() means we only putting only one row
+        return view('edit-student',['students'=>$students]);
+    }
+
+    public function update($id, Request $request){
+        $students = Student::where('id', '=', $id) -> first();
+        //here $students are like object like  $obj = new Student()
+
+        $students->name = $request->name;
+        $students->email = $request->email;
+        $students->dob = $request->dob;
+
+        if($students->save()){
+            return redirect()->to('students');
+        }
+
 
     }
 }
