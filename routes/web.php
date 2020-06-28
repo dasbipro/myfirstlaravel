@@ -19,16 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-
 Route::get('about-us/{name}/{email}', function ($name, $email) {
-    return view('about-us', ['myname' => $name, 'email' => $email]);
-});
+    return view('about-us', ['myname' => $name, 'email' => $email]);});
 Route::get('contact/{contact}', 'MyContact@contact');
-
 Route::get('team/{name}', 'MyController@team');
-
 
 
 
@@ -40,3 +34,15 @@ Route::get('employee', 'EmployeesController@index');
 Route::get('add-info', 'EmployeesController@add');
 
 Route::post('insert-employee', 'EmployeesController@store');
+
+
+
+
+
+
+
+Route::get('add-student', 'StudentController@create');
+
+Route::post('insert-student', 'StudentController@store');
+
+Route::get('students','StudentController@index');
