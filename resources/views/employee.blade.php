@@ -11,7 +11,7 @@
     <div>
         <h1> All Employees </h1>
         <a href="{{ URL::to('add-info')}}">Add Employee</a>
-        <table>
+        <table border="1">
             <thead>
 
                 <th>Name</th>
