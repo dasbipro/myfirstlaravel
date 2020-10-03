@@ -14,6 +14,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{URL::to('login')}}">Log In</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{URL::to('about-us')}}">about</a>
                 </li>
                 <li class="nav-item">

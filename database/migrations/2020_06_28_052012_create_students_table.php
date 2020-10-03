@@ -17,7 +17,16 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->date('dob');
+            $table->date('dob')->nullable();
+            $table->integer('salary')->nullable();
+            $table->string('description')->nullable();
+            $table->string('city')->nullable();
+            $table->string('address')->nullable();
+            $table->string('country')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('domain')->nullable();
+            $table->string('ip_address')->nullable();
+            $table->string('profile_image')->nullable();
             $table->timestamps();
         });
     }

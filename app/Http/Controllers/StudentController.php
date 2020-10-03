@@ -8,9 +8,9 @@ use App\Student;
 
 class StudentController extends Controller
 {
-    public function index(){
+    public function all(){
         $students = Student::all(); //work as, select * from student table
-        return view('students',['students'=>$students]);
+        return view('students',['data'=>$students]);
     }
 
 

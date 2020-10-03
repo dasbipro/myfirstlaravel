@@ -14,7 +14,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $data = Product::leftJoin('categories','products.category_id','categories.id')->select('products.id','products.title','products.status','categories.title as category')
+        ->get();
+        //->all(); //select * from all
+        return view('admin.pages.products',['products'=>$data]);
     }
 
     /**

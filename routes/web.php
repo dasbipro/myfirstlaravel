@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MyContact;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('about-us/{name}/{email}', function ($name, $email) {
+//     return view('about-us', ['myname' => $name, 'email' => $email]);});
+// Route::get('contact/{contact}', 'MyContact@contact');
+// Route::get('team/{name}', 'MyController@team');
+// Route::get('employee', 'EmployeesController@index');
+// Route::get('add-info', 'EmployeesController@add');
+// Route::post('insert-employee', 'EmployeesController@store');
+
+
+
+
+// Authentication
+// Route::get('login', 'AuthController@login');
+// Route::post('loginstore', 'AuthController@store');
 
 // website panel
 
@@ -31,56 +47,66 @@ Route::get('/contact', function () {
     return view('website.pages.contact');
 });
 
-
-// Route::get('about-us/{name}/{email}', function ($name, $email) {
-//     return view('about-us', ['myname' => $name, 'email' => $email]);});
-// Route::get('contact/{contact}', 'MyContact@contact');
-// Route::get('team/{name}', 'MyController@team');
+// Authentication
+// Route::get('login', 'AuthController@login');
+// Route::post('loginstore', 'AuthController@store');
 
 
 
+//  Employee Panel
+
+// Route::get('employee-add', 'EmployeeController@add');
+// Route::post('store-employee', 'EmployeeController@store');
+// Route::get('employees', 'EmployeeController@all');
+// Route::get('edit-employee/{id}', 'EmployeeController@edit');
+// Route::post('update-employee/{id}', 'EmployeeController@update');
+// Route::get('delete-employee/{id}', 'EmployeeController@delete');
 
 
+// Route::get('add-student', 'StudentController@create');
 
-Route::get('employee', 'EmployeesController@index');
+// Route::post('insert-student', 'StudentController@store');
 
-Route::get('add-info', 'EmployeesController@add');
+Route::get('students','StudentController@all');
 
-Route::post('insert-employee', 'EmployeesController@store');
-
-
-
-
+// Route::get('edit-student/{id}','StudentController@edit');
+// Route::post('update-student/{id}','StudentController@update');
 
 
-
-Route::get('add-student', 'StudentController@create');
-
-Route::post('insert-student', 'StudentController@store');
-
-Route::get('students','StudentController@index');
-Route::get('edit-student/{id}','StudentController@edit');
-Route::post('update-student/{id}','StudentController@update');
-
-
-
-
-
-
-//Admin Panel
-Route::get('/dashboard',function(){
-    return view('admin.pages.dashboard');
-});
-
-Route::get('/tables',function(){
-    return view('admin.pages.tables');
-});
-
-Route::get('/charts', function () {
-    return view('admin.pages.charts');
-});
 
 //Log In Page
 
-Route::get('login','UserAuthController@login');
+Route::get('/login', 'UserAuthController@login')->middleware('can:isAdmin')->name('login');
+// Route::get('/login', 'UserAuthController@login')->middleware('can:isAdmin')->name('items.delete');
+// Route::get('/login', 'UserAuthController@login')->middleware('can:isAdmin')->name('items.delete');
+Route::get('/login','UserAuthController@login');
 Route::post('loginstore','UserAuthController@loginstore');
+
+Route::group(['middleware' => 'checkloggedin'], function () {
+        //Admin Panel
+        Route::get('dashboard',function(){
+            return view('admin.pages.dashboard');
+        });
+        Route::get('tables',function(){
+            return view('admin.pages.tables');
+        });
+        Route::get('charts', function () {
+            return view('admin.pages.charts');
+        });
+        Route::get('products','ProductController@index');
+        //image upload
+        Route::get('image-upload','ImageController@index');
+        Route::post('upload','ImageController@upload');
+
+        //  Employee Panel
+
+        Route::get('employee-add', 'EmployeeController@add');
+        Route::post('store-employee', 'EmployeeController@store');
+        Route::get('employees', 'EmployeeController@all');
+        Route::get('edit-employee/{id}', 'EmployeeController@edit');
+        Route::post('update-employee/{id}', 'EmployeeController@update');
+        Route::get('delete-employee/{id}', 'EmployeeController@delete');
+        Route::get('multipleimageupload', 'MultipleImageController@index');
+        Route::post("upload_image", "MultipleImageController@store");
+
+});
