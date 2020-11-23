@@ -47,6 +47,10 @@ Route::get('/contact', function () {
     return view('website.pages.contact');
 });
 
+Route::get('ajax','AjaxCOntroller@ajax');
+Route::get('getdistricts/{division_id}', 'AjaxCOntroller@getDistricts');
+
+
 // Authentication
 // Route::get('login', 'AuthController@login');
 // Route::post('loginstore', 'AuthController@store');
